@@ -107,6 +107,7 @@ for (test_or_train in c("test", "train")) {
 if (!dir.exists("output")) dir.create ("output")
 save(tidiedFeatures, file="output/tidiedFeatures.Rdata")
 
+write.table(tidiedFeatures, "tidiedFeatures.txt", row.names = F)
 
 
 
@@ -128,10 +129,12 @@ summarizedData <- group_by(tidiedFeatures, Activity, SubjectID) %>%
 if (!dir.exists("output")) dir.create ("output")
 save(summarizedData, file="output/summarizedData.Rdata")
 
+write.table(summarizedData, "summarizedData.txt", row.names = F)
+
 ###show a both output sets
 View(sample_n(as.data.frame(tidiedFeatures), 30), "SAMPLE of tidied data"  )
 View(summarizedData, "Summarized Data"  )
 
 
 ### cleanup all data variables except the two output tables 
-#rm(list=grep("tidiedFeatures|summarizedData", ls(), invert=T, value=T))
+rm(list=grep("tidiedFeatures|summarizedData", ls(), invert=T, value=T))
